@@ -1,0 +1,35 @@
+:root {
+  --bg: #0b0b0c;
+  --bg-raised: #0e0e10;
+  --bg-panel: #101012;
+
+  --fg: #f2f1ee;
+  --fg-dim: rgba(242, 241, 238, 0.62);
+  --fg-mute: rgba(242, 241, 238, 0.5);
+  --fg-faint: rgba(242, 241, 238, 0.45);
+  --fg-hint: rgba(242, 241, 238, 0.35);
+  --fg-ghost: rgba(242, 241, 238, 0.26);
+
+  --ink: #111110;
+
+  --line: rgba(242, 241, 238, 0.09);
+  --surface-line: rgba(242, 241, 238, 0.12);
+  --line-strong: rgba(242, 241, 238, 0.14);
+  --line-focus: rgba(242, 241, 238, 0.45);
+
+  --font-sans: 'Archivo', Helvetica, system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, 'Courier New', monospace;
+
+  --gutter: clamp(20px, 3.4vw, 34px);
+
+  --radius-s: 3px;
+  --radius-m: 4px;
+  --radius-pill: 100px;
+
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --stripe-a: #1e1e24;
+  --stripe-b: #131317;
+
+  --drift-x: 56px;
+}
