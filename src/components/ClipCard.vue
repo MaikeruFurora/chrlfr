@@ -82,13 +82,15 @@ function openFull() {
   border-radius: var(--radius-m);
   cursor: pointer;
   transition:
-    border-color 0.3s,
-    transform 0.4s var(--ease-out);
+    border-color 0.35s,
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out);
 }
 
 .clip__frame:hover {
   border-color: var(--line-focus);
-  transform: scale(1.015);
+  transform: scale(1.025) translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
 }
 
 .clip__video {
@@ -124,13 +126,17 @@ function openFull() {
   color: var(--fg);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
   opacity: 0;
-  transition: opacity 0.3s;
+  transform: scale(0.92);
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
   pointer-events: none;
 }
 
 .clip__frame:hover .clip__hint,
 .clip__frame:focus-visible .clip__hint {
   opacity: 1;
+  transform: scale(1);
 }
 
 .clip__caption {

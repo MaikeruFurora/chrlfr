@@ -138,11 +138,17 @@ input {
   transition:
     background-color 0.25s,
     box-shadow 0.25s,
-    border-color 0.25s;
+    border-color 0.25s,
+    transform 0.25s var(--ease-snap);
 }
 
 .btn:hover {
   background: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .btn__hint {
@@ -188,10 +194,10 @@ input {
 
 .reveal {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(20px);
   transition:
-    opacity 0.7s var(--ease-out),
-    transform 0.7s var(--ease-out);
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
 }
 
 .reveal.is-revealed {
@@ -222,9 +228,11 @@ input {
   0%,
   100% {
     transform: translateY(0);
+    opacity: 0.6;
   }
   50% {
-    transform: translateY(7px);
+    transform: translateY(9px);
+    opacity: 1;
   }
 }
 
@@ -234,6 +242,37 @@ input {
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
 

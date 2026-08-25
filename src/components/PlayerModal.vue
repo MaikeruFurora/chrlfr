@@ -75,11 +75,13 @@ watch(current, async (value) => {
   position: absolute;
   inset: 0;
   background: rgba(8, 8, 9, 0.93);
+  animation: fadeIn 0.25s var(--ease-out) both;
 }
 
 .player__panel {
   position: relative;
   width: min(1200px, 100%);
+  animation: popIn 0.35s var(--ease-snap) both;
 }
 
 .player__bar {

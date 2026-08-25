@@ -32,6 +32,7 @@ const gridClass = GRID_CLASS[columnCount as 1 | 2 | 3]
       <ClipCard
         v-for="(clip, i) in work.clips"
         :key="clip.id"
+        v-reveal="i * 70"
         :clip="clip"
         :work-name="work.name"
         :index="i + 1"

@@ -74,6 +74,11 @@ import { about, profile } from '../data/site'
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.portrait:hover .portrait__img {
+  transform: scale(1.04);
 }
 
 .portrait__ph {

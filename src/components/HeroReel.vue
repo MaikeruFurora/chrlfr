@@ -1,42 +1,40 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { hero } from '../data/site'
 import { totalClipCount } from '../data/films'
 import { usePlayer } from '../composables/usePlayer'
 
-const { open } = usePlayer()
+const { open, current } = usePlayer()
 
 const videoEl = ref<HTMLVideoElement | null>(null)
-const muted = ref(true)
-let gestureHooked = false
 
-function applyMute(value: boolean) {
-  const video = videoEl.value
-  if (!video) return
-  muted.value = value
-  video.muted = value
-  if (!value && video.paused) {
-    video.play().catch(() => {})
+// Browsers only allow unmuted playback after a real user activation gesture.
+// Scrolling does not count as one, so listening for wheel events would burn
+// the handler without earning the right to unmute.
+const GESTURES = ['pointerdown', 'keydown', 'touchend']
+
+let soundUnlocked = false
+
+function unhookGestures() {
+  for (const type of GESTURES) {
+    document.removeEventListener(type, unlockSound)
   }
 }
 
-function unhookGesture() {
-  document.removeEventListener('pointerdown', tryUnmuteOnGesture)
-  document.removeEventListener('keydown', tryUnmuteOnGesture)
-  gestureHooked = false
-}
+function unlockSound() {
+  if (soundUnlocked) return
+  soundUnlocked = true
+  unhookGestures()
 
-function tryUnmuteOnGesture(event: Event) {
-  if ((event.target as HTMLElement | null)?.closest?.('.hero__sound')) return
-  unhookGesture()
-  applyMute(false)
-}
+  const video = videoEl.value
+  if (!video) return
 
-function hookGesture() {
-  if (gestureHooked) return
-  gestureHooked = true
-  document.addEventListener('pointerdown', tryUnmuteOnGesture)
-  document.addEventListener('keydown', tryUnmuteOnGesture)
+  // If that first gesture was the click that opened the modal, the modal owns
+  // the audio; the watcher below hands it back when the modal closes.
+  if (!current.value) {
+    video.muted = false
+    video.play().catch(() => {})
+  }
 }
 
 onMounted(async () => {
@@ -47,24 +45,22 @@ onMounted(async () => {
   try {
     await video.play()
   } catch {
-    return
+    // Autoplay refused outright — the first gesture starts it, with sound.
   }
 
-  try {
-    video.muted = false
-    await video.play()
-    muted.value = false
-  } catch {
-    video.muted = true
-    muted.value = true
-    hookGesture()
+  for (const type of GESTURES) {
+    document.addEventListener(type, unlockSound, { passive: true })
   }
 })
 
-function toggleMute() {
-  unhookGesture()
-  applyMute(!muted.value)
-}
+// Never let the hero and the modal play over each other.
+watch(current, (value) => {
+  const video = videoEl.value
+  if (!video) return
+  video.muted = Boolean(value) || !soundUnlocked
+})
+
+onBeforeUnmount(unhookGestures)
 </script>
 
 <template>
@@ -83,26 +79,6 @@ function toggleMute() {
     <p v-if="!hero.videoSrc" class="hero__slot" aria-hidden="true">
       showreel · autoplay muted<br />2560 × 1440 mp4
     </p>
-
-    <button
-      v-if="hero.videoSrc"
-      class="hero__sound"
-      type="button"
-      :aria-pressed="!muted"
-      @click="toggleMute"
-    >
-      <svg v-if="!muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M11 5 6 9H2v6h4l5 4V5Z" />
-        <path d="M15.5 8.5a5 5 0 0 1 0 7" />
-        <path d="M18.5 5.5a9.5 9.5 0 0 1 0 13" />
-      </svg>
-      <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M11 5 6 9H2v6h4l5 4V5Z" />
-        <path d="m23 9-6 6" />
-        <path d="m17 9 6 6" />
-      </svg>
-      <span>{{ muted ? 'Muted' : 'Sound on' }}</span>
-    </button>
 
     <div class="hero__shade" aria-hidden="true"></div>
 
@@ -182,40 +158,6 @@ function toggleMute() {
   color: var(--fg-ghost);
 }
 
-.hero__sound {
-  position: absolute;
-  top: 18px;
-  right: var(--gutter);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 9px 14px;
-  background: rgba(11, 11, 12, 0.55);
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius-pill);
-  color: var(--fg);
-  font: 600 9px/1 var(--font-mono);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition:
-    border-color 0.25s,
-    background-color 0.25s;
-}
-
-.hero__sound:hover {
-  border-color: var(--fg);
-  background: rgba(11, 11, 12, 0.78);
-}
-
-.hero__sound svg {
-  width: 14px;
-  height: 14px;
-}
-
 .hero__shade {
   position: absolute;
   inset: 0;
@@ -245,6 +187,7 @@ function toggleMute() {
 
 .hero__kicker {
   color: rgba(242, 241, 238, 0.75);
+  animation: slideInUp 0.6s var(--ease-snap) both;
 }
 
 .hero__title {
@@ -253,6 +196,7 @@ function toggleMute() {
   font-weight: 700;
   line-height: 0.9;
   letter-spacing: -0.055em;
+  animation: slideInUp 0.7s var(--ease-snap) 0.08s both;
 }
 
 .hero__blurb {
@@ -262,6 +206,7 @@ function toggleMute() {
   line-height: 1.55;
   color: rgba(242, 241, 238, 0.72);
   text-wrap: pretty;
+  animation: slideInUp 0.7s var(--ease-snap) 0.18s both;
 }
 
 .hero__cta {
@@ -270,6 +215,7 @@ function toggleMute() {
   align-items: flex-end;
   gap: 12px;
   flex: none;
+  animation: slideInUp 0.7s var(--ease-snap) 0.28s both;
 }
 
 .hero__scroll {
