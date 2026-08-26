@@ -10,7 +10,7 @@ const year = new Date().getFullYear()
 
     <div class="contact__row">
       <p class="contact__details">
-        {{ profile.email }}<br />Manila, PH · open to relocation<br />Available immediately
+        {{ profile.email }}<br />{{ profile.location }}<br />{{ profile.availability }}
       </p>
 
       <div class="contact__actions">
@@ -20,7 +20,7 @@ const year = new Date().getFullYear()
           :href="profile.resumeUrl"
           download="Christian-Flora-Resume.pdf"
         >
-          <span aria-hidden="true">↓</span>Download résumé<span class="btn__hint">PDF · 240 KB</span>
+          <span aria-hidden="true">↓</span>Download résumé<span class="btn__hint">PDF · 85 KB</span>
         </a>
       </div>
     </div>

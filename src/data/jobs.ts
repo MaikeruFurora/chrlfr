@@ -15,7 +15,7 @@ export const jobs: Job[] = [
     company: 'Puppeteer Studios',
     title: '3D character animator',
     summary:
-      'Character animation for commercial spots and game cinematics. Handled shots from blocking to final polish, helped the rigging team when a shot needed it, and mentored two junior animators on body mechanics.',
+      'Character animation for cinematic trailers, taking shots from blocking to final polish and revising them shot by shot in dailies with the directors. Animated scenes for the cinematic trailer of Kwek Kwek, an original studio IP, and joined the game animation team for in-game work — idle cycles and loops built to read cleanly on repeat.',
     skills: [
       'Maya',
       'Blender',
@@ -31,9 +31,9 @@ export const jobs: Job[] = [
     company: 'Freelance',
     title: 'Character modeling',
     summary:
-      'Took on character modeling work between studio contracts — sculpt, retopology and look-dev in Maya, texture sets painted in Substance 3D Painter, delivered production-ready.',
+      'Modeled 3D characters for virtual reality projects — sculpt, retopology and look-dev in Maya, texture sets painted in Substance 3D Painter, handed over production-ready.',
     skills: ['Character modeling', 'Maya', 'Substance 3D Painter'],
-    address: ['Remote', 'Manila, Philippines'],
+    address: ['Remote · Camarines Sur', 'Client based in Cebu'],
   },
   {
     period: '2023 — 2024',

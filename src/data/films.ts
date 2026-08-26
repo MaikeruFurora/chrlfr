@@ -47,6 +47,13 @@ export const characterWorks: CharacterWork[] = [
         poster: './media/beta/beta-walk-ii.jpg',
         duration: '00:06',
       },
+      {
+        id: 'beta-punch',
+        label: 'Punch',
+        src: './media/beta/beta-punch.mp4',
+        poster: './media/beta/beta-punch.jpg',
+        duration: '00:04',
+      },
     ],
   },
   {
