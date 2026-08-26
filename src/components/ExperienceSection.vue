@@ -18,7 +18,17 @@ import { jobs } from '../data/jobs'
       <p class="job__period">{{ job.period }}<br />{{ job.commitment }}</p>
 
       <div class="job__main">
-        <h3 class="job__company">{{ job.company }}</h3>
+        <div class="job__ident">
+          <img
+            v-if="job.logo"
+            class="job__logo"
+            :src="job.logo"
+            :alt="`${job.company} logo`"
+            loading="lazy"
+            decoding="async"
+          />
+          <h3 class="job__company">{{ job.company }}</h3>
+        </div>
         <p class="job__role">{{ job.title }}</p>
         <p class="job__summary">{{ job.summary }}</p>
 
@@ -57,6 +67,20 @@ import { jobs } from '../data/jobs'
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--fg-faint);
+}
+
+.job__ident {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.job__logo {
+  flex: none;
+  height: 38px;
+  width: auto;
+  max-width: 130px;
+  object-fit: contain;
 }
 
 .job__company {
