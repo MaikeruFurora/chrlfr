@@ -133,6 +133,20 @@ export const characterWorks: CharacterWork[] = [
       },
     ],
   },
+  {
+    id: 'muddy',
+    name: 'MUDDY',
+    tagline: 'Character acting · rendered',
+    clips: [
+      {
+        id: 'muddy-i',
+        label: 'Take I',
+        src: './media/muddy/muddy-i.mp4',
+        poster: './media/muddy/muddy-i.jpg',
+        duration: '00:13',
+      },
+    ],
+  },
 ]
 
 export const totalClipCount = characterWorks.reduce(
