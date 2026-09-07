@@ -120,20 +120,6 @@ export const characterWorks: CharacterWork[] = [
     ],
   },
   {
-    id: 'reimu',
-    name: 'REIMU',
-    tagline: 'Single-shot study',
-    clips: [
-      {
-        id: 'reimu-i',
-        label: 'Take I',
-        src: './media/reimu/reimu-i.mp4',
-        poster: './media/reimu/reimu-i.jpg',
-        duration: '00:06',
-      },
-    ],
-  },
-  {
     id: 'muddy',
     name: 'MUDDY',
     tagline: 'Character acting · rendered',
@@ -144,6 +130,20 @@ export const characterWorks: CharacterWork[] = [
         src: './media/muddy/muddy-i.mp4',
         poster: './media/muddy/muddy-i.jpg',
         duration: '00:13',
+      },
+    ],
+  },
+  {
+    id: 'reimu',
+    name: 'REIMU',
+    tagline: 'Single-shot study',
+    clips: [
+      {
+        id: 'reimu-i',
+        label: 'Take I',
+        src: './media/reimu/reimu-i.mp4',
+        poster: './media/reimu/reimu-i.jpg',
+        duration: '00:06',
       },
     ],
   },
