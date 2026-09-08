@@ -33,6 +33,7 @@ function openFull() {
   <figure class="clip">
     <button
       class="clip__frame"
+      :class="{ 'clip__frame--portrait': clip.portrait }"
       type="button"
       :aria-label="`Play ${clip.label} full size`"
       @click="openFull"
@@ -85,6 +86,11 @@ function openFull() {
     border-color 0.35s,
     transform 0.35s var(--ease-out),
     box-shadow 0.35s var(--ease-out);
+}
+
+/* 1920x2160 source — matching the frame keeps the whole shot visible. */
+.clip__frame--portrait {
+  aspect-ratio: 8 / 9;
 }
 
 .clip__frame:hover {

@@ -4,6 +4,8 @@ export interface Clip {
   src: string
   poster: string
   duration: string
+  /** Vertical source — the card switches to a portrait frame so nothing is cropped. */
+  portrait?: boolean
 }
 
 export interface CharacterWork {
@@ -59,7 +61,7 @@ export const characterWorks: CharacterWork[] = [
   {
     id: 'ninja',
     name: 'NINJA',
-    tagline: 'Action · two-camera study',
+    tagline: 'Action · multi-camera study',
     clips: [
       {
         id: 'ninja-i-cam-a',
@@ -74,6 +76,14 @@ export const characterWorks: CharacterWork[] = [
         src: './media/ninja/ninja-i-cam2.mp4',
         poster: './media/ninja/ninja-i-cam2.jpg',
         duration: '00:05',
+      },
+      {
+        id: 'ninja-vertical',
+        label: 'Vertical cut',
+        src: './media/ninja/ninja-vertical.mp4',
+        poster: './media/ninja/ninja-vertical.jpg',
+        duration: '00:05',
+        portrait: true,
       },
     ],
   },

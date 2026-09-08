@@ -12,8 +12,14 @@ const GRID_CLASS = {
   3: 'group__grid--3',
 } as const
 
+// One vertical take beside landscape ones: stack the landscape takes in the left
+// column and let the portrait fill the full height on the right. Two 16:9 frames
+// stacked are exactly as tall as one 8:9 at the same width (2 / 1.778 = 9 / 8).
+const isSplit =
+  props.work.clips.length === 3 && props.work.clips.filter((clip) => clip.portrait).length === 1
+
 const columnCount = props.work.clips.length === 4 ? 2 : Math.min(props.work.clips.length, 3)
-const gridClass = GRID_CLASS[columnCount as 1 | 2 | 3]
+const gridClass = isSplit ? 'group__grid--split' : GRID_CLASS[columnCount as 1 | 2 | 3]
 </script>
 
 <template>
@@ -33,6 +39,7 @@ const gridClass = GRID_CLASS[columnCount as 1 | 2 | 3]
         v-for="(clip, i) in work.clips"
         :key="clip.id"
         v-reveal="i * 70"
+        :class="{ group__feature: isSplit && clip.portrait }"
         :clip="clip"
         :work-name="work.name"
         :index="i + 1"
@@ -91,10 +98,44 @@ const gridClass = GRID_CLASS[columnCount as 1 | 2 | 3]
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.group__grid--split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* landscape takes stack down the left column */
+.group__grid--split > * {
+  grid-column: 1;
+}
+
+.group__feature {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  height: 100%;
+}
+
+/* drop the fixed ratio so the frame fills both rows exactly */
+.group__feature :deep(.clip__frame) {
+  flex: 1;
+  aspect-ratio: auto;
+}
+
 @media (max-width: 720px) {
   .group__grid--2,
-  .group__grid--3 {
+  .group__grid--3,
+  .group__grid--split {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .group__grid--split > *,
+  .group__feature {
+    grid-column: 1;
+    grid-row: auto;
+    height: auto;
+  }
+
+  .group__feature :deep(.clip__frame) {
+    flex: initial;
+    aspect-ratio: 8 / 9;
   }
 }
 </style>
