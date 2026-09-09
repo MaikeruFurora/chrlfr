@@ -18,7 +18,7 @@ export const profile = {
   email: 'chr.flora101@gmail.com',
   resumeUrl: './resume.pdf',
   /** Filename the browser saves the résumé as, rather than the generic resume.pdf. */
-  resumeFileName: 'Christian_Flora_CV.pdf',
+  resumeFileName: 'Christian_Flora_Resume.pdf',
   resumeSize: '80 KB',
   availability: 'Open to full-time roles · willing to relocate',
 }
