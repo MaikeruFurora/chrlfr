@@ -16,7 +16,7 @@ export const jobs: Job[] = [
     commitment: 'Full-time',
     company: 'Puppeteer Studios',
     logo: './img/puppeteer-studios.png',
-    title: '3D character animator',
+    title: '3D animator',
     summary:
       'Character animation for cinematic trailers, taking shots from blocking to final polish and revising them shot by shot in dailies with the directors. Animated scenes for the cinematic trailer of Kwek Kwek, an original studio IP, and joined the game animation team for in-game work — idle cycles and loops built to read cleanly on repeat.',
     skills: [

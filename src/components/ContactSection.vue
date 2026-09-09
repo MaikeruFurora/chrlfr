@@ -18,9 +18,9 @@ const year = new Date().getFullYear()
         <a
           class="btn btn--outline"
           :href="profile.resumeUrl"
-          download="Christian-Flora-Resume.pdf"
+          :download="profile.resumeFileName"
         >
-          <span aria-hidden="true">↓</span>Download résumé<span class="btn__hint">PDF · 85 KB</span>
+          <span aria-hidden="true">↓</span>Download résumé<span class="btn__hint">PDF · {{ profile.resumeSize }}</span>
         </a>
       </div>
     </div>

@@ -35,7 +35,7 @@ import { about, profile } from '../data/site'
         <a
           class="btn body__cta"
           :href="profile.resumeUrl"
-          download="Christian-Flora-Resume.pdf"
+          :download="profile.resumeFileName"
         >
           <span aria-hidden="true">↓</span>Download résumé<span class="btn__hint">PDF</span>
         </a>

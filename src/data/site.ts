@@ -13,10 +13,13 @@ export const navLinks: NavLink[] = [
 
 export const profile = {
   name: 'Christian Flora',
-  role: '3D Character Animator',
+  role: '3D Animator',
   location: 'Camarines Sur, PH',
   email: 'chr.flora101@gmail.com',
   resumeUrl: './resume.pdf',
+  /** Filename the browser saves the résumé as, rather than the generic resume.pdf. */
+  resumeFileName: 'Christian_Flora_CV.pdf',
+  resumeSize: '80 KB',
   availability: 'Open to full-time roles · willing to relocate',
 }
 

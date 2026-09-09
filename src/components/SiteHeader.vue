@@ -21,7 +21,7 @@ import { navLinks, profile } from '../data/site'
       <p class="status">
         <span class="status__dot" aria-hidden="true"></span>{{ profile.availability }}
       </p>
-      <a class="btn btn--sm" :href="profile.resumeUrl" download="Christian-Flora-Resume.pdf">
+      <a class="btn btn--sm" :href="profile.resumeUrl" :download="profile.resumeFileName">
         <span aria-hidden="true">↓</span>Résumé<span class="btn__hint">PDF</span>
       </a>
     </div>
