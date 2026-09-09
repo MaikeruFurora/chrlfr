@@ -16,7 +16,7 @@ export const profile = {
   role: '3D Animator',
   location: 'Camarines Sur, PH',
   email: 'chr.flora101@gmail.com',
-  resumeUrl: './resume.pdf',
+  resumeUrl: './Christian_Flora_Resume.pdf',
   /** Filename the browser saves the résumé as, rather than the generic resume.pdf. */
   resumeFileName: 'Christian_Flora_Resume.pdf',
   resumeSize: '80 KB',
