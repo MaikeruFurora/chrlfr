@@ -41,11 +41,11 @@ export const disciplines = [
 ]
 
 export const hero = {
-  reelDuration: '00:48',
+  reelDuration: '01:01',
   blurb:
     '3D character animator based in Camarines Sur, Philippines. Two years at Puppeteer Studios animating cinematic trailers and in-game character work, plus character modeling before that. Reel is up top — full shots below.',
-  videoSrc: './media/reel/flora-reel-2025.mp4',
-  poster: './media/reel/flora-reel-2025.jpg',
+  videoSrc: './media/reel/flora-reel-2026.mp4',
+  poster: './media/reel/flora-reel-2026.jpg',
 }
 
 export interface AboutFact {
